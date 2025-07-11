@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Optimiser mon PC – Nexus</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+  <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section class="intro">
+    <h2>🛠️ Nos Services</h2>
+    <p>Chez Nexus, chaque ordinateur est remis à neuf avec soin, puis personnalisé selon tes besoins techniques, visuels ou logiciels.</p>
+  </section>
+
+  <section class="presentation">
+    <ul>
+      <li>🔧 <strong>Reconditionnement complet</strong> : nettoyage interne, remplacement de composants, test matériel</li>
+      <button onclick="remplirFormulaire('Reconditionnement complet')">Faire une demande</button>
+      <li>⚙️ <strong>Upgrade matériel</strong> : ajout ou remplacement de RAM, SSD, batterie haute capacité</li>
+      <button onclick="remplirFormulaire('Upgrade matériel')">Faire une demande</button>
+      <li>🎨 <strong>Personnalisation</strong> : animation de démarrage Nexus, splash BIOS, thème visuel sur mesure</li>
+      <button onclick="remplirFormulaire('Personnalisation esthétique')">Faire une demande</button>
+      <li>🔐 <strong>Sécurité</strong> : chiffrement BitLocker/VeraCrypt, suppression sécurisée de disques</li>
+      <button onclick="remplirFormulaire('Sécurité renforcée')">Faire une demande</button>
+      <li>💡 <strong>Dual Boot & OS</strong> : installation de Windows, Ubuntu, ou les deux avec menu de démarrage</li>
+      <button onclick="remplirFormulaire('Dual Boot & OS')">Faire une demande</button>
+      <li>🧪 <strong>Test de performances</strong> : configuration optimisée avec Geekbench/CrystalDiskMark</li>
+      <button onclick="remplirFormulaire('Test de performances')">Faire une demande</button>
+      <li>📦 <strong>Livraison ou remise en main propre</strong> : Paris et alentours — soignée et rapide</li>
+      <button onclick="remplirFormulaire('Livraison / remise en main propre')">Faire une demande</button>
+      <li>📞 <strong>Support personnalisé</strong> : contact direct via WhatsApp ou e-mail professionnel</li>
+      <button onclick="remplirFormulaire('Support personnalisé')">Faire une demande</button>
+    </ul>
+  </section>
+
+  <section class="intro">
+    <a href="catalogue.html" class="cta">Voir les modèles Nexus</a>
+  </section>
+
+  <form id="formService">
+    <h2 style="text-align:center;">Faire une demande personnalisée</h2>
+
+    <label>Nom :</label>
+    <input type="text" id="nom" required />
+    <br>
+    <label>E-mail :</label>
+    <input type="email" id="email" required />
+    <br>
+    <label>Service souhaité :</label>
+    <select id="choixService" required>
+      <option value="">-- Choisir --</option>
+      <option value="Reconditionnement complet">Reconditionnement complet</option>
+      <option value="Upgrade matériel">Upgrade matériel</option>
+      <option value="Personnalisation esthétique">Personnalisation esthétique</option>
+      <option value="Sécurité renforcée">Sécurité renforcée</option>
+      <option value="Dual Boot & OS">Dual Boot & OS</option>
+      <option value="Test de performances">Test de performances</option>
+      <option value="Livraison / remise en main propre">Livraison / remise en main propre</option>
+      <option value="Support personnalisé">Support personnalisé</option>
+    </select>
+    <br>
+    <label>Message :</label>
+    <textarea id="message" rows="5" required></textarea>
+
+    <div class="canal-options">
+  <label><input type="radio" name="canal" value="email" checked> Par e-mail</label>
+  <label><input type="radio" name="canal" value="whatsapp"> Via WhatsApp</label>
+</div>
+
+    <button type="button" onclick="envoyerDemande()">Envoyer ma demande</button>
+  </form>
+</main>
+  <!-- 💬 Mini Chat WhatsApp Nexus -->
+<div id="miniChat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+  <div id="toggleChat" style="
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  ">
+    💬
+  </div>
+  <div id="chatBox" style="
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #1e1e1e;
+    color: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  ">
+    <p style="margin: 0 0 8px; font-size: 14px;"><strong>Besoin d’aide ? 👋</strong></p>
+    <p style="margin: 0 0 8px; font-size: 14px;">Écris-nous sur WhatsApp</p>
+    <a href="https://wa.me/33773636597" target="_blank" style="
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    ">
+      Écrire sur WhatsApp
+    </a>
+    <span onclick="document.getElementById('chatBox').style.display='none'" style="
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+    ">✖</span>
+  </div>
+</div>
+
+<script>
+  document.getElementById("toggleChat").addEventListener("click", () => {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  });
+
+  function remplirFormulaire(service) {
+    document.getElementById("formService").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("choixService").value = service;
+  }
+
+  function envoyerDemande() {
+    const nom = document.getElementById("nom").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const service = document.getElementById("choixService").value;
+    const msg = document.getElementById("message").value.trim();
+    const canal = document.querySelector('input[name="canal"]:checked').value;
+
+    if (!nom || !email || !service || !msg) {
+      alert("Merci de remplir tous les champs avant l'envoi.");
+      return;
+    }
+
+    const texte = encodeURIComponent(`Nom: ${nom}\nEmail: ${email}\nService: ${service}\nMessage: ${msg}`);
+    exporterDevisPDF(service, nom, email, msg);
+
+    if (canal === 'email') {
+      window.open("mailto:contact.nexuspc1@gmail.com?subject=Demande de service Nexus&body=" + texte);
+    } else {
+      window.open("https://wa.me/33773636597?text=" + texte, "_blank");
+    }
+  }
+
+  function exporterDevisPDF(service, nom, email, msg) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Demande de Service – Nexus", 20, 20);
+
+    doc.setFontSize(11);
+    doc.setFont("Helvetica", "normal");
+    doc.text(`Nom : ${nom}`, 20, 35);
+    doc.text(`Email : ${email}`, 20, 42);
+    doc.text(`Service demandé : ${service}`, 20, 49);
+    doc.text("Message :", 20, 56);
+
+    const lignes = msg.split("\n");
+    let y = 63;
+    lignes.forEach(line => {
+      doc.text(line, 20, y);
+      y += 6;
+    });
+
+    doc.save("Devis_Nexus.pdf");
+  }
+</script>
+<footer>
+  <p>© 2025 Nexus – Propulsé par Ellyott ⚡</p>
+  <p>📍 Paris | Email : contact.nexuspc1@gmail.com | WhatsApp Business</p>
+</footer>
+</body>
+</html>

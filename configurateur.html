@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Configurateur – Nexus ThinkPad T540p</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .configurator select, .configurator input[type=checkbox], .configurator input[type=radio] {
+      margin: 8px 0;
+      padding: 8px;
+      width: 100%;
+      max-width: 500px;
+      background: #1c1c1c;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 4px;
+    }
+    .configurator label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+    .summary-box {
+      background-color: #111;
+      border: 1px solid #00ffcc;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 8px;
+    }
+    .options-group {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+    <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+  <main class="configurator">
+    <section class="intro">
+      <h2>🧩 Ton PC, tes choix</h2>
+      <p>Personnalise ton Nexus ThinkPad T540p selon tes besoins. Le résumé et le prix seront calculés automatiquement.</p>
+    </section>
+
+    <label for="clientName">Nom du client :</label>
+    <input type="text" id="clientName" name="clientName" placeholder="Ex : Martin Dupont" required />
+
+    <form id="config-form">
+      <!-- RAM -->
+      <label for="ram">💾 Mémoire RAM :</label>
+      <select id="ram">
+        <option value="16">16 Go (déjà inclus gratuitement)</option>
+        <option value="8">8 Go (réduction du prix)</option>
+        <option value="4">4 Go (usage ultra léger)</option>
+      </select>
+
+      <!-- Stockage principal -->
+      <label for="storage">💽 Stockage principal (SSD ou HDD) :</label>
+      <select id="storage">
+        <option value="256">SSD 256 Go (inclus gratuitement)</option>
+        <option value="512">SSD 512 Go</option>
+        <option value="1000">SSD 1 To</option>
+        <option value="2000">SSD 2 To</option>
+        <option value="1000hdd">HDD 1 To (plus lent)</option>
+      </select>
+
+      <label for="bay">Baie optique :</label>
+<select id="bay">
+  <option value="hdd" selected>HDD secondaire via caddy (inclus)</option>
+  <option value="dvd">Lecteur CD/DVD (option +25 €)</option>
+</select>
+
+
+      <!-- Carte SD -->
+      <label><input type="checkbox" id="sdCard" checked disabled /> Carte SD 128 Go (déjà incluse dans ce modèle)</label>
+
+      <!-- WWAN ou SSD M.2 exclusifs -->
+      <label>💾 Emplacement WWAN :</label>
+      <div class="options-group">
+        <label><input type="radio" name="wwan" value="none" checked /> Aucun</label>
+        <label><input type="radio" name="wwan" value="wwanModule" /> Carte WWAN 4G LTE</label>
+        <label><input type="radio" name="wwan" value="m2ssd" /> SSD M.2 SATA 2242 (jusqu'à 512 Go)</label>
+      </div>
+
+      <!-- Processeur -->
+      <label for="cpu">⚙️ Processeur :</label>
+      <select id="cpu">
+        <option>Intel i5-4300M (déjà installé)</option>
+        <option>Intel i7-4600M (jusqu'à 3,6 GHz, 4 Mo cache)</option>
+        <option>Intel i7-4800MQ (jusqu'à 3,7 GHz, 6 Mo cache)</option>
+        <option>Intel i7-4900MQ (jusqu'à 3,8 GHz, 8 Mo cache)</option>
+      </select>
+
+      <!-- Écran -->
+      <label for="screen">💡 Écran 15.6" :</label>
+      <select id="screen">
+        <option>HD 1366×768 (déjà installé)</option>
+        <option>Full HD 1920×1080 (TN)</option>
+        <option>IPS 3K 2880×1620</option>
+      </select>
+
+      <!-- Clavier -->
+      <label for="keyboard">⌨️ Clavier :</label>
+      <select id="keyboard">
+        <option>AZERTY classique</option>
+        <option>QWERTY US</option>
+        <option>Clavier rétroéclairé AZERTY</option>
+        <option>Clavier rétroéclairé QWERTY</option>
+      </select>
+
+      <!-- Autres options -->
+      <label><input type="checkbox" id="nvidia" /> Carte graphique NVIDIA (nécessite carte mère dédiée)</label>
+      <label><input type="checkbox" id="trackpad" /> Changement de trackpad (ClickPad avec boutons séparés)</label>
+      <label><input type="checkbox" id="dock" /> Dock Lenovo en option</label>
+      <label><input type="checkbox" id="sdCard" checked disabled /> Animation Nexus personnalisée / BIOS splash (déjà inclus)</label>
+      
+
+      <!-- Office -->
+      <label for="os">🖥️ Système d’exploitation :</label>
+      <select id="os">
+        <option>Windows</option>
+        <option>Ubuntu</option>
+        <option>Fedora</option>
+        <option>Debian</option>
+        <option>Dual Boot (Win + Linux)</option>
+        <option>Multi Boot (3 OS+)</option>
+      </select>
+
+      <label><input type="checkbox" id="office" /> Ajouter une licence Microsoft Office</label>
+    </form>
+<div id="boxContent" class="box-section" style="margin-top: 20px;">
+  <h4>📦 Contenu de la boîte</h4>
+  <ul id="boxList">
+    <!-- Cette liste sera remplie automatiquement par JavaScript -->
+  </ul>
+</div>
+    <!-- Résumé -->
+    <div class="summary-box" id="summary">
+      <h3>🧾 Résumé de ta configuration</h3>
+      <p id="result">Remplis les options ci-dessus pour voir apparaître le résumé…</p>
+      <p id="price">💰 Estimation du prix : —</p>
+      <a id="whatsappBtn" href="#" class="cta" style="display: none;" target="_blank">Commander via WhatsApp</a>
+      <button id="downloadPdf" class="cta" style="margin-top: 10px;">
+  📄 Télécharger la fiche PDF
+</button>
+<a id="emailBtn" href="#" style="display:none">Envoyer par email</a>
+
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Nexus • Configuration réalisée par Ellyott CISSE⚡</p>
+    <p>📧 contact.nexuspc1@gmail.com | 📱 WhatsApp : 07 73 63 65 97</p>
+  </footer>
+
+  <!-- Script externe -->
+  <script src="js/configurateur.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+ <!-- 💬 Mini Chat WhatsApp Nexus -->
+<div id="miniChat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+  <div id="toggleChat" style="
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  ">
+    💬
+  </div>
+  <div id="chatBox" style="
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #1e1e1e;
+    color: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  ">
+    <p style="margin: 0 0 8px; font-size: 14px;"><strong>Besoin d’aide ? 👋</strong></p>
+    <p style="margin: 0 0 8px; font-size: 14px;">Écris-nous sur WhatsApp</p>
+    <a href="https://wa.me/33773636597" target="_blank" style="
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    ">
+      Écrire sur WhatsApp
+    </a>
+    <span onclick="document.getElementById('chatBox').style.display='none'" style="
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+    ">✖</span>
+  </div>
+</div>
+
+<script>
+  document.getElementById("toggleChat").addEventListener("click", () => {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  });
+</script>
+</div>
+
+</body>
+</html>

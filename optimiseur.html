@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Optimiser mon PC – Nexus</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+  <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+<body>
+  <div class="card">
+    <section class="optimiseur-section">
+    <h2>🔧 Optimiser mon PC</h2>
+    <p>Je détecte ton PC ou tu peux remplir manuellement :</p>
+    
+    <label for="model">📌 Modèle :</label>
+    <input type="text" id="model" placeholder="Ex: ThinkPad T440p">
+    <br>
+    <label for="ram">💾 RAM actuelle :</label>
+    <select id="ram">
+      <option value="4">4 Go</option>
+      <option value="8" selected>8 Go</option>
+      <option value="16">16 Go</option>
+    </select>
+    <br>
+    <label for="storage">🖴 Stockage principal :</label>
+    <select id="storage">
+      <option value="128">128 Go SSD</option>
+      <option value="256" selected>256 Go SSD</option>
+      <option value="512">512 Go SSD</option>
+      <option value="1000hdd">1000 Go HDD</option>
+    </select>
+    <br>
+    <button onclick="analyser()">Analyser mon PC</button>
+
+    <div class="result" id="result"></div>
+    <a id="whatsBtn" href="#" target="_blank" style="display:none; margin-top: 20px; display: inline-block; background-color: #25D366; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">
+  💬 Commander par WhatsApp
+</a>
+<button id="pdfBtn" onclick="genererPDF()" style="display:none; background:#333;">📄 Télécharger la fiche PDF</button>
+  </div>
+  <div>
+    </section>
+  <section class="optimiseur-section2">
+  <h2>🛠️ Nettoyage & Optimisation</h2>
+  <p>Choisis ton système d’exploitation :</p>
+  <select id="choixOS" onchange="afficherConseils()">
+    <option value="">-- Choisir --</option>
+    <option value="windows">🪟 Windows</option>
+    <option value="linux">🐧 Linux</option>
+    <option value="macos">🍏 macOS</option>
+  </select>
+
+  <div id="conseils" style="margin-top: 20px;"></div>
+</div>
+
+
+  <script>
+    const stock = {
+  ram8go: true,
+  ssd256: false,
+  ssd512: true,
+  hdd1000: false
+};
+    function analyser() {
+      const model = document.getElementById("model").value.toLowerCase();
+      const ram = parseInt(document.getElementById("ram").value);
+      const storage = document.getElementById("storage").value;
+
+      const recommandations = [];
+
+      // Suggestions RAM
+      if (ram < 8) recommandations.push("Ajoutez de la RAM (8 Go minimum recommandé)");
+
+      // Suggestions stockage
+      if (storage === "1000hdd") recommandations.push("Passez sur un SSD pour accélérer le système");
+
+      // Suggestion selon modèle
+      if (model.includes("t4") || model.includes("t5")) {
+        recommandations.push("Modèle compatible SSD SATA 2.5'' – Dispo chez Nexus");
+      }
+
+      if (recommandations.length === 0) {
+        recommandations.push("Aucun problème détecté. Votre configuration est déjà optimale.");
+      }
+
+      document.getElementById("result").innerHTML =
+        "<h3>Recommandations :</h3><ul>" +
+        recommandations.map(r => `<li>${r}</li>`).join("") + "</ul>";
+
+        // Ajout d'infos stock Nexus
+let stockMsg = "<h4>Stock disponible chez Nexus :</h4><ul>";
+if (ram < 8 && stock.ram8go) stockMsg += "<li>Barrette RAM 8 Go dispo</li>";
+if (storage === "1000hdd" && stock.ssd256) stockMsg += "<li>SSD 256 Go dispo</li>";
+if (stock.ssd512) stockMsg += "<li>SSD 512 Go en stock</li>";
+stockMsg += "</ul>";
+
+document.getElementById("result").innerHTML += stockMsg;
+
+
+        const message = encodeURIComponent(
+  `Bonjour, voici ce que Nexus m’a conseillé pour améliorer mon PC (${model}) :\n\n` +
+  recommandations.map(r => "• " + r).join("\n") +
+  "\n\nAvez-vous ces pièces en stock ? Merci !"
+);
+
+const whatsBtn = document.getElementById("whatsBtn");
+whatsBtn.href = `https://wa.me/33773636597?text=${message}`;
+whatsBtn.style.display = "inline-block";
+
+document.getElementById("pdfBtn").style.display = "inline-block";
+
+
+    }
+
+function afficherConseils() {
+  const os = document.getElementById("choixOS").value;
+  const zone = document.getElementById("conseils");
+  zone.innerHTML = ""; // reset
+
+  if (os === "windows") {
+    zone.innerHTML = `
+      <h3>🔵 Windows – Nettoyage conseillé</h3>
+      <ul>
+        <li>🧹 <strong>Cleanmgr</strong> : touche Windows + R, tape <code>cleanmgr</code></li>
+        <li>🚫 Désactive les programmes inutiles au démarrage (Ctrl+Maj+Echap)</li>
+        <li>🔍 Analyse avec <strong>Malwarebytes</strong> ou ton antivirus</li>
+        <li>⚙️ Mets à jour tes pilotes via <strong>Snappy Driver Installer</strong></li>
+        <li>📥 Supprime les logiciels préinstallés (“bloatware”)</li>
+      </ul>`;
+  }
+
+  else if (os === "linux") {
+    zone.innerHTML = `
+      <h3>🟢 Linux – Optimisation légère</h3>
+      <ul>
+        <li>🧼 Vide le cache avec <code>sudo apt clean</code> ou <code>sudo pacman -Sc</code></li>
+        <li>🧠 Ferme les services inutiles avec <code>htop</code> ou <code>systemctl disable</code></li>
+        <li>🔧 Désactive les extensions GNOME ou effets superflus (si faible PC)</li>
+        <li>📦 Supprime les paquets orphelins (<code>sudo apt autoremove</code>)</li>
+        <li>🧪 Utilise <strong>Stacer</strong> ou <strong>BleachBit</strong> pour un nettoyage graphique</li>
+      </ul>`;
+  }
+
+  else if (os === "macos") {
+    zone.innerHTML = `
+      <h3>🍏 macOS – Conseils d’optimisation</h3>
+      <ul>
+        <li>🗑️ Vider la corbeille et les caches utilisateurs (~/Library/Caches)</li>
+        <li>🧹 Utilise un outil comme <strong>CleanMyMac</strong> ou <strong>OnyX</strong></li>
+        <li>🚫 Va dans Préférences > Utilisateurs > Éléments d’ouverture et désactive ce qui est inutile</li>
+        <li>📦 Supprime les apps non utilisées via Finder ou AppCleaner</li>
+        <li>🔍 Surveille ton activité avec Moniteur d’activité</li>
+      </ul>`;
+  }
+}
+</script>
+<script>
+async function genererPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const model = document.getElementById("model").value || "Modèle non précisé";
+  const ram = document.getElementById("ram").value;
+  const storage = document.getElementById("storage").value;
+  const result = document.getElementById("result").innerText;
+  const today = new Date().toLocaleDateString("fr-FR");
+
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("Fiche de conseils – Nexus", 20, 20);
+
+  doc.setFontSize(10);
+  doc.setFont("Helvetica", "normal");
+  doc.text(`Date : ${today}`, 20, 30);
+  doc.text(`PC analysé : ${model.toUpperCase()} – ${ram} Go RAM – ${storage}`, 20, 38);
+
+  doc.setFontSize(12);
+  doc.setFont("Helvetica", "bold");
+  doc.text("Recommandations :", 20, 50);
+
+  const lignes = result.split("\n");
+  let y = 58;
+  doc.setFont("Helvetica", "normal");
+
+  lignes.forEach(line => {
+    if (y >= 280) { doc.addPage(); y = 20; }
+    doc.text("• " + line, 20, y);
+    y += 8;
+  });
+
+  y += 10;
+  doc.setFontSize(10);
+  doc.setFont("Helvetica", "italic");
+  doc.text("Merci de faire confiance à Nexus pour booster votre PC", 20, y);
+
+  doc.save("Fiche_Conseils_Nexus.pdf");
+}
+</script>
+
+
+
+  </script>
+  </section>
+ <div class="card" style="margin-top: 40px;">
+    <section class="optimiseur-section3">
+  <h2>📚 Centre de Guides Nexus</h2>
+<p>Voici les guides disponibles. Clique pour générer le PDF correspondant :</p>
+<div class="guides-grid">
+<button onclick="generateGuidePDF('nettoyer')">🧹 Nettoyer un PC lent sur Windows</button>
+<button onclick="generateGuidePDF('reinstaller')">💻 Réinstaller proprement Windows</button>
+<button onclick="generateGuidePDF('linux')">🐧 Installer Linux simplement</button>
+<button onclick="generateGuidePDF('diff-linux-windows')">📖 Linux vs Windows</button>
+<button onclick="generateGuidePDF('cle-usb')">💾 Créer une clé USB bootable</button>
+<button onclick="generateGuidePDF('apres-install')">🎯 Premiers gestes après Linux</button>
+<button onclick="generateGuidePDF('opt-linux')">⚙️ Optimiser Linux</button>
+<button onclick="generateGuidePDF('opt-services')">🧠 Désactiver les services inutiles</button>
+<button onclick="generateGuidePDF('securite-windows')">🔐 Sécuriser Windows</button>
+<button onclick="generateGuidePDF('securite-linux')">🛡️ Sécuriser Linux</button>
+<button onclick="generateGuidePDF('vpn-navigateur')">🕶️ Naviguer en sécurité</button>
+<button onclick="generateGuidePDF('dualboot')">🔁 Installer Windows et Linux (dual boot)</button>
+<button onclick="generateGuidePDF('choisir-linux')">📦 Choisir sa distribution Linux</button>
+<button onclick="generateGuidePDF('sauvegarde')">💽 Faire une sauvegarde complète</button>
+<button onclick="generateGuidePack()">📦 Télécharger tous les guides (PDF complet)</button>
+<br>
+<h3>Télécharger les guides par système :</h3>
+<br>
+<button onclick="generateGuidePackByOS('windows')">Windows</button>
+<button onclick="generateGuidePackByOS('linux')">Linux</button>
+<button onclick="generateGuidePackByOS('macos')">macOS</button>
+</div>
+  <p style="margin-top: 20px;">🛠️ Si tu bloques malgré tout ou si tu veux de l'aide sur un autre sujet, tu peux toujours m’écrire sur WhatsApp (réponse sous 24h) :</p>
+  <br>
+  <a href="https://wa.me/33773636597" target="_blank" style="background-color:#25D366; color:white; padding:10px 15px; text-decoration:none; border-radius:5px;">💬 Écrire à Nexus</a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</section>
+<script>
+async function generateGuidePDF(type) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(14);
+
+  if (type === 'nettoyer') {
+    doc.text("GUIDE – Nettoyer un PC lent", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Désinstalle les logiciels inutiles : Démarrer > Applications > Trier par taille.",
+      "2. Nettoie les fichiers temporaires : Windows + R > cleanmgr > OK.",
+      "3. Désactive les programmes au démarrage : Ctrl + Maj + Echap.",
+      "4. Analyse avec Malwarebytes ou ton antivirus.",
+      "5. Redémarre pour valider les changements."
+    ], 20, 35);
+    doc.save("Guide_Nettoyer_PC.pdf");
+
+  } else if (type === 'reinstaller') {
+    doc.text("GUIDE – Réinstaller Windows proprement", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Sauvegarde tes fichiers personnels.",
+      "2. Télécharge l'Outil création média de Microsoft.",
+      "3. Crée une clé USB bootable Windows.",
+      "4. Redémarre et boote sur la clé USB.",
+      "5. Supprime les partitions existantes et installe Windows."
+    ], 20, 35);
+    doc.save("Guide_Reinstaller_Windows.pdf");
+
+  } else if (type === 'linux') {
+    doc.text("GUIDE – Installer Linux simplement", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Télécharge une distribution Linux (Ubuntu, Mint…).",
+      "2. Télécharge BalenaEtcher : etcher.balena.io.",
+      "3. Flash l'image ISO sur une clé USB.",
+      "4. Redémarre et boote sur la clé.",
+      "5. Essaye d'abord Linux, puis installe si tout fonctionne."
+    ], 20, 35);
+    doc.save("Guide_Installer_Linux.pdf");
+
+  } else if (type === 'diff-linux-windows') {
+    doc.text("GUIDE – Linux vs Windows", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Prix : Windows est payant, Linux est gratuit.",
+      "2. Sécurité : Linux a moins de virus.",
+      "3. Logiciels : Alternatives libres sous Linux.",
+      "4. Performances : Linux est plus léger.",
+      "5. Interface : Linux est très personnalisable.",
+      "6. Idéal pour débutants comme experts."
+    ], 20, 35);
+    doc.save("Guide_Linux_vs_Windows.pdf");
+
+  } else if (type === 'cle-usb') {
+    doc.text("GUIDE – Créer une clé USB bootable", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Télécharge BalenaEtcher : etcher.balena.io.",
+      "2. Télécharge l'image ISO souhaitée.",
+      "3. Insère une clé USB > Lance Etcher > Sélectionne ISO > Flash.",
+      "4. Une fois terminé, la clé est prête à l'emploi.",
+      "5. Redémarre et accède au BIOS pour booter sur la clé."
+    ], 20, 35);
+    doc.save("Guide_Cle_USB_Linux.pdf");
+
+  } else if (type === 'apres-install') {
+    doc.text("GUIDE – Premiers gestes après Linux", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Vérifie ta connexion Internet.",
+      "2. Lance les mises à jour : sudo apt update && upgrade.",
+      "3. Installe les codecs : Mint propose le pack automatiquement.",
+      "4. Active le pare-feu : sudo ufw enable.",
+      "5. Installe tes logiciels préférés : GIMP, Firefox, LibreOffice.",
+      "6. Explore le centre logiciel selon ta distribution."
+    ], 20, 35);
+    doc.save("Guide_Premiers_Gestes_Linux.pdf");
+
+  } else if (type === 'opt-linux') {
+    doc.text("GUIDE – Optimiser Linux", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Supprime les paquets inutiles : sudo apt autoremove.",
+      "2. Nettoie le cache : sudo apt clean.",
+      "3. Désactive les effets visuels si ton PC est lent.",
+      "4. Utilise Stacer ou BleachBit pour simplifier le nettoyage.",
+      "5. Surveille les processus avec htop."
+    ], 20, 35);
+    doc.save("Guide_Optimiser_Linux.pdf");
+
+  } else if (type === 'opt-services') {
+    doc.text("GUIDE – Désactiver les services inutiles", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Windows : Ctrl + Maj + Echap > Démarrage.",
+      "2. Linux : sudo systemctl list-unit-files.",
+      "   - sudo systemctl disable nom_du_service.",
+      "3. Vérifie les processus avec htop ou Moniteur système.",
+      "4. Redémarre pour valider les changements."
+    ], 20, 35);
+    doc.save("Guide_Desactiver_Services.pdf");
+  } else if (type === 'securite-windows') {
+    doc.text("GUIDE – Sécuriser Windows", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Active le pare-feu dans les Paramètres.",
+      "2. Mets à jour régulièrement Windows.",
+      "3. Utilise un antivirus fiable comme Defender ou Bitdefender.",
+      "4. Analyse avec Malwarebytes tous les mois.",
+      "5. Évite les logiciels piratés ou de sources douteuses.",
+      "6. Sauvegarde tes données importantes."
+    ], 20, 35);
+    doc.save("Guide_Securite_Windows.pdf");
+
+  } else if (type === 'securite-linux') {
+    doc.text("GUIDE – Sécuriser Linux", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Active UFW : sudo ufw enable",
+      "2. Mets à jour régulièrement : sudo apt update && upgrade",
+      "3. Évite les PPA douteux et scripts inconnus.",
+      "4. Installe uniquement depuis les dépôts officiels.",
+      "5. Utilise des mots de passe forts pour ton compte.",
+      "6. Pour les serveurs : fail2ban, auditd, backups réguliers."
+    ], 20, 35);
+    doc.save("Guide_Securite_Linux.pdf");
+
+  } else if (type === 'vpn-navigateur') {
+    doc.text("GUIDE – Naviguer en sécurité", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Utilise un navigateur respectueux (Firefox, Brave…).",
+      "2. Active les bloqueurs de pub (uBlock Origin).",
+      "3. Active HTTPS partout (extension HTTPS Everywhere).",
+      "4. Utilise un VPN si tu es en Wi-Fi public.",
+      "5. Ne télécharge pas de fichiers inconnus.",
+      "6. Active le mode de protection contre le tracking."
+    ], 20, 35);
+    doc.save("Guide_Navigation_Securisee.pdf");
+
+  } else if (type === 'dualboot') {
+    doc.text("GUIDE – Installer Linux en dual boot", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Sauvegarde tes fichiers importants.",
+      "2. Crée une clé USB Linux bootable.",
+      "3. Redémarre le PC et boote sur la clé.",
+      "4. Clique sur 'Installer', choisis 'Installer à côté de Windows'.",
+      "5. Choisis une partition ou réduis la taille de celle existante.",
+      "6. Finalise l’installation > redémarre.",
+      "7. Tu pourras choisir Linux ou Windows au démarrage (GRUB)."
+    ], 20, 35);
+    doc.save("Guide_Dual_Boot_Linux_Windows.pdf");
+
+  } else if (type === 'choisir-linux') {
+    doc.text("GUIDE – Choisir sa distribution Linux", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Linux Mint : simple, recommandé pour débuter.",
+      "2. Ubuntu LTS : populaire, bien supporté, bon pour tous profils.",
+      "3. Zorin OS : design proche de Windows.",
+      "4. Fedora : stable, bon pour la création multimédia.",
+      "5. Manjaro : rolling release, orienté performance.",
+      "6. Arch Linux : ultra personnalisé, pour utilisateurs avancés.",
+      "Conseil : commence avec Mint ou Zorin avant d'explorer plus loin."
+    ], 20, 35);
+    doc.save("Guide_Choisir_Distribution_Linux.pdf");
+
+  } else if (type === 'sauvegarde') {
+    doc.text("GUIDE – Faire une sauvegarde complète", 20, 20);
+    doc.setFontSize(11); doc.setFont("Helvetica", "normal");
+    doc.text([
+      "1. Identifie les dossiers à sauvegarder (Documents, Photos…).",
+      "2. Utilise un disque dur externe ou un service cloud.",
+      "3. Outils Windows : Historique des fichiers, Acronis, Macrium Reflect.",
+      "4. Outils Linux : Déjà Dup (Ubuntu), rsync, Timeshift.",
+      "5. Vérifie régulièrement l'intégrité de tes sauvegardes.",
+      "6. Automatise si possible la sauvegarde chaque semaine."
+    ], 20, 35);
+    doc.save("Guide_Sauvegarde_Systeme.pdf");
+}
+}
+</script>
+<script>
+function generateGuidePackByOS(os) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("Pack de Guides Nexus – " + os.toUpperCase(), 20, 20);
+  doc.setFontSize(11);
+  doc.setFont("Helvetica", "normal");
+
+  const allGuides = {
+    windows: [
+      { title: "Nettoyer un PC lent", content: [
+        "Désinstalle les applications inutiles.",
+        "Nettoie les fichiers temporaires.",
+        "Réduis les programmes au démarrage.",
+        "Analyse avec un antivirus.",
+        "Redémarre pour valider."
+      ]},
+      { title: "Réinstaller Windows proprement", content: [
+        "Sauvegarde tes fichiers.",
+        "Télécharge l’Outil création média.",
+        "Crée une clé USB Windows.",
+        "Installe proprement en supprimant les partitions."
+      ]},
+      { title: "Sécuriser Windows", content: [
+        "Active le pare-feu.",
+        "Mets à jour régulièrement.",
+        "Analyse avec Malwarebytes.",
+        "Utilise un antivirus fiable.",
+        "Évite les logiciels douteux."
+      ]},
+      { title: "Désactiver les services inutiles", content: [
+        "Utilise le Gestionnaire des tâches (Ctrl + Maj + Echap).",
+        "Désactive les programmes inutiles au démarrage."
+      ]},
+      { title: "Faire une sauvegarde complète", content: [
+        "Identifie les fichiers importants.",
+        "Utilise un disque dur externe.",
+        "Automatise si possible."
+      ]}
+    ],
+    linux: [
+      { title: "Installer Linux simplement", content: [
+        "Télécharge une distribution Linux.",
+        "Utilise BalenaEtcher pour flasher l’ISO.",
+        "Boote sur la clé USB.",
+        "Teste puis installe."
+      ]},
+      { title: "Premiers gestes après Linux", content: [
+        "Connecte-toi à Internet.",
+        "Lance les mises à jour.",
+        "Active le pare-feu (ufw).",
+        "Installe les logiciels essentiels."
+      ]},
+      { title: "Optimiser Linux", content: [
+        "Supprime les paquets inutiles.",
+        "Nettoie le cache.",
+        "Utilise Stacer ou BleachBit.",
+        "Surveille les ressources avec htop."
+      ]},
+      { title: "Sécuriser Linux", content: [
+        "Active UFW.",
+        "Évite les scripts inconnus.",
+        "Mets à jour régulièrement.",
+        "Utilise des mots de passe forts."
+      ]},
+      { title: "Choisir sa distribution Linux", content: [
+        "Linux Mint : simple et léger.",
+        "Ubuntu LTS : populaire.",
+        "Zorin OS : design proche de Windows.",
+        "Arch / Manjaro : plus avancés."
+      ]}
+    ],
+    macos: [
+      { title: "Naviguer en sécurité", content: [
+        "Utilise un navigateur respectueux.",
+        "Active les bloqueurs de publicité.",
+        "Utilise un VPN sur réseau public.",
+        "Ne télécharge pas n’importe quoi."
+      ]},
+      { title: "Faire une sauvegarde complète", content: [
+        "Utilise Time Machine.",
+        "Sauvegarde sur un disque externe ou iCloud.",
+        "Automatise les sauvegardes hebdomadaires."
+      ]},
+      { title: "Désactiver les services inutiles", content: [
+        "Préférences Système > Utilisateurs > Éléments d’ouverture.",
+        "Désactive les apps au démarrage.",
+        "Nettoie les apps avec AppCleaner ou OnyX."
+      ]}
+    ]
+  };
+
+  const selected = allGuides[os];
+  if (!selected) return;
+
+  doc.text("Ce document contient des conseils adaptés à " + os.toUpperCase() + ".", 20, 30);
+  let y = 40;
+  selected.forEach((guide, i) => {
+    doc.text((i + 1) + ". " + guide.title, 20, y);
+    y += 6;
+  });
+
+  selected.forEach((guide, i) => {
+    doc.addPage();
+    doc.setFontSize(14);
+    doc.setFont("Helvetica", "bold");
+    doc.text(guide.title, 20, 20);
+    doc.setFontSize(11);
+    doc.setFont("Helvetica", "normal");
+    let y = 35;
+    guide.content.forEach(line => {
+      doc.text(line, 20, y);
+      y += 6;
+    });
+  });
+
+  doc.save("Guides_Nexus_" + os + ".pdf");
+}
+</script>
+<script>
+async function generateGuidePack() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("Pack de Guides Nexus", 20, 20);
+
+  doc.setFontSize(11);
+  doc.setFont("Helvetica", "normal");
+  doc.text("Ce document regroupe 15 guides pratiques pour optimiser, protéger et maîtriser votre PC.", 20, 30);
+
+  // Sommaire
+  const guidesList = [
+    "1. Nettoyer un PC lent",
+    "2. Réinstaller Windows proprement",
+    "3. Installer Linux simplement",
+    "4. Linux vs Windows",
+    "5. Créer une clé USB bootable",
+    "6. Premiers gestes après Linux",
+    "7. Optimiser Linux",
+    "8. Désactiver les services inutiles",
+    "9. Sécuriser Windows",
+    "10. Sécuriser Linux",
+    "11. Naviguer en sécurité",
+    "12. Installer Linux et Windows (Dual Boot)",
+    "13. Choisir sa distribution Linux",
+    "14. Faire une sauvegarde complète",
+    "15. Pack complet Nexus"
+  ];
+
+  let y = 40;
+  guidesList.forEach(guide => {
+    doc.text(guide, 20, y);
+    y += 6;
+  });
+
+  // Ajouter chaque guide sur une nouvelle page
+  for (let i = 1; i <= 15; i++) {
+    doc.addPage();
+    doc.setFontSize(14);
+    doc.setFont("Helvetica", "bold");
+    doc.text(guidesList[i - 1], 20, 20);
+    doc.setFontSize(11);
+    doc.setFont("Helvetica", "normal");
+
+    // Récupère le contenu PDF de chaque guide via la fonction existante
+    // Ici, tu peux soit :
+    // - dupliquer chaque contenu depuis generateGuidePDF()
+    // - ou créer un tableau `contenus[i]` avec les textes séparés
+
+    // Exemple pour le premier :
+    if (i === 1) {
+      doc.text([
+        "1. Désinstalle les logiciels inutiles.",
+        "2. Nettoie les fichiers temporaires.",
+        "3. Désactive les programmes au démarrage.",
+        "4. Analyse avec antivirus.",
+        "5. Redémarre pour valider."
+      ], 20, 35);
+    }
+
+    // Ajoute tous les autres avec un `if (i === x)` selon ton contenu
+  }
+
+  doc.save("Pack_Guides_Nexus.pdf");
+}
+</script>
+<footer>
+  <p>© 2025 Nexus – Propulsé par Ellyott ⚡</p>
+  <p>📍 Paris | Email : contact.nexuspc1@gmail.com | WhatsApp Business</p>
+</footer>
+<!-- 💬 Mini Chat WhatsApp Nexus -->
+<div id="miniChat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+  <div id="toggleChat" style="
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  ">
+    💬
+  </div>
+  <div id="chatBox" style="
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #1e1e1e;
+    color: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  ">
+    <p style="margin: 0 0 8px; font-size: 14px;"><strong>Besoin d’aide ? 👋</strong></p>
+    <p style="margin: 0 0 8px; font-size: 14px;">Écris-nous sur WhatsApp</p>
+    <a href="https://wa.me/33773636597" target="_blank" style="
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    ">
+      Écrire sur WhatsApp
+    </a>
+    <span onclick="document.getElementById('chatBox').style.display='none'" style="
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+    ">✖</span>
+  </div>
+</div>
+<script>
+  document.getElementById("toggleChat").addEventListener("click", () => {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  });
+</script>
+</body>
+</html>

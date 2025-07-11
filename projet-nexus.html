@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet NexusOS</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+  <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+<body>
+  <div class="container">
+    <section class="intro">
+    <h1>🚀 Projet NexusOS</h1>
+    <p class="tagline">Un écosystème d’OS pensé pour l’indépendance, la performance et la liberté numérique.</p>
+    </section>
+    <div class="section">
+      <section class="nexus-box">
+      <h2>📱 NexusOS Android (basé sur LineageOS 22)</h2>
+      <p>NexusOS Android est un système d’exploitation mobile personnalisé, basé sur LineageOS 22, conçu pour être optimisé, épuré et prêt pour le développement Android. Il est flashé en ADB sur tablette Android compatible.</p>
+      <ul>
+        <li>Version base : LineageOS 22</li>
+        <li>Installation via <a href="https://developer.android.com/tools/adb" target="_blank">ADB</a></li>
+        <li>Objectif : système rapide, sans bloatware, avec launcher Nexus</li>
+      </ul>
+      <a href="#" class="btn">📥 Télécharger la ROM (bientôt)</a>
+      </section>
+    </div>
+
+    <div class="section">
+      <section class="nexus-box">
+      <h2>💻 NexusOS PC</h2>
+      <p>Un futur OS pour PC en cours de conception. L’objectif : créer un système fluide, sécurisé et centré sur la productivité. Inspiré de FaranahOS et de ZenithOS, il s’intégrera parfaitement à l’écosystème Nexus Devices.</p>
+      <ul>
+        <li>Basé sur Linux avec interface personnalisée</li>
+        <li>Focus sur développeurs, créatifs, étudiants</li>
+        <li>Installation live USB (ISO à venir)</li>
+      </ul>
+      </section>
+    </div>
+
+    <div class="section">
+      <section class="nexus-box">
+      <h2>🗺️ Roadmap</h2>
+      <ul class="roadmap">
+        <li>✅ Étape 1 : choix du socle (LineageOS 22, base Debian)</li>
+        <li>✅ Étape 2 : préparation ADB & debug tablette</li>
+        <li>🔄 Étape 3 : création du launcher Nexus</li>
+        <li>🔜 Étape 4 : personnalisation de l’interface</li>
+        <li>🔜 Étape 5 : test utilisateur & publication</li>
+      </ul>
+      </section>
+    </div>
+
+    <div class="section">
+      <section class="nexus-box">
+      <h2>🖼️ Aperçus (bientôt)</h2>
+      <p>Les captures et maquettes de NexusOS seront ajoutées au fur et à mesure du développement.</p>
+      </section>
+    </div>
+
+    <div class="section">
+      <section class="nexus-box">
+      <h2>À propos du créateur</h2>
+      <p>Je m'appelle <strong>Ellyott</strong>, j'ai 14 ans, et je suis passionné par le développement informatique. J’ai débuté sur Windows, puis j’ai adopté Ubuntu pour créer mon propre écosystème. Je suis le fondateur de <strong>Nexus</strong>, une vision complète mêlant OS, matériels et services innovants.</p>
+      <button onclick="genererFicheNexusOS()">📄 Télécharger la fiche NexusOS (PDF)</button>
+      <button onclick="generateNexusOS_EN()">📄 Download NexusOS Presentation (EN)</button>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+async function genererFicheNexusOS() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Titre
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("NexusOS – Présentation Officielle", 20, 20);
+
+  // Infos générales
+  doc.setFontSize(10);
+  doc.setFont("Helvetica", "normal");
+  doc.text("Auteur : Ellyott Cissé – Fondateur de Nexus", 20, 30);
+  doc.text("Âge : 14 ans / Nationalité : Français", 20, 35);
+  doc.text("Date : " + new Date().toLocaleDateString("fr-FR"), 20, 40);
+
+  let y = 50;
+
+  // Vision
+  doc.setFont("Helvetica", "bold");
+  doc.text("Vision NexusOS", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  doc.text("Créer un OS libre, rapide, respectueux de la vie privée, adapté au développement moderne.", 20, y); y += 10;
+
+  // Android Version
+  doc.setFont("Helvetica", "bold");
+  doc.text("Version Android (basée LineageOS 22)", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  doc.text("- Base : LineageOS 22 (AOSP)", 20, y); y += 6;
+  doc.text("- Installation via ADB sur tablette Android", 20, y); y += 6;
+  doc.text("- But : système épuré, rapide, sans bloatware", 20, y); y += 10;
+
+  // PC Version
+  doc.setFont("Helvetica", "bold");
+  doc.text("Version PC (NexusOS Desktop)", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  doc.text("- Projet en cours basé sur Debian", 20, y); y += 6;
+  doc.text("- Interface à venir (inspirée de GNOME ou Cinnamon)", 20, y); y += 6;
+  doc.text("- Objectif : environnement dev fluide, sécurisé", 20, y); y += 10;
+
+  // Roadmap
+  doc.setFont("Helvetica", "bold");
+  doc.text("Roadmap NexusOS", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  const étapes = [
+    "Étape 1 : Choix du socle technique (Terminé)",
+    "Étape 2 : Configuration ADB (Terminé)",
+    "Étape 3 : Création du launcher Nexus (En cours)",
+    "Étape 4 : Interface personnalisée (Bientôt)",
+    "Étape 5 : Phase de test bêta (Bientôt)"
+  ];
+  étapes.forEach(ligne => { doc.text("• " + ligne, 20, y); y += 6; });
+
+  // Fin
+  y += 10;
+  doc.setFont("Helvetica", "italic");
+  doc.text("Merci de soutenir ce projet libre porté par la passion et l’avenir de la tech européenne", 20, y);
+  doc.save("Fiche_NexusOS_Ellyott.pdf");
+}
+async function generateNexusOS_EN() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(16);
+  doc.text("NexusOS – Official Presentation", 20, 20);
+
+  doc.setFontSize(10);
+  doc.setFont("Helvetica", "normal");
+  doc.text("Author: Ellyott Cissé – Founder of Nexus", 20, 30);
+  doc.text("Age: 14 / Nationality: French", 20, 35);
+  doc.text("Date: " + new Date().toLocaleDateString("en-GB"), 20, 40);
+
+  let y = 50;
+  doc.setFont("Helvetica", "bold");
+  doc.text("Vision", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  doc.text("A free, fast, privacy-respecting operating system for today and tomorrow’s users.", 20, y); y += 10;
+
+  doc.setFont("Helvetica", "bold");
+  doc.text("Android Edition (based on LineageOS 22)", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  doc.text("- Base: LineageOS 22 (AOSP)", 20, y); y += 6;
+  doc.text("- Installed via ADB (Android Debug Bridge)", 20, y); y += 6;
+  doc.text("- Goal: lightweight, clean, developer-friendly", 20, y); y += 10;
+
+  doc.setFont("Helvetica", "bold");
+  doc.text("Desktop Edition (NexusOS PC)", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  doc.text("- In progress, Linux-based", 20, y); y += 6;
+  doc.text("- Will feature a custom desktop interface", 20, y); y += 6;
+  doc.text("- Aimed at developers, creatives, and learners", 20, y); y += 10;
+
+  doc.setFont("Helvetica", "bold");
+  doc.text("Development Roadmap", 20, y); y += 8;
+  doc.setFont("Helvetica", "normal");
+  const roadmap = [
+    "Phase 1: Define technical base (Finished)",
+    "Phase 2: ADB setup for Android devices (Finished)",
+    "Phase 3: Custom Nexus launcher (In progress)",
+    "Phase 4: Interface design + polish (Soon)",
+    "Phase 5: Beta testing & feedback (Soon)"
+  ];
+  roadmap.forEach(line => { doc.text("• " + line, 20, y); y += 6; });
+
+  y += 10;
+  doc.setFont("Helvetica", "italic");
+  doc.text("Thank you for supporting this independent OS project by a new generation of creators", 20, y);
+
+  doc.save("NexusOS_Official_EN.pdf");
+}
+</script>
+<footer>
+    <p>© 2025 Nexus – Site conçu par Ellyott CISSE⚡</p>
+    <p>📍 Paris | Langues : FR • EN</p>
+  </footer>
+<!-- 💬 Mini Chat WhatsApp Nexus -->
+<div id="miniChat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+  <div id="toggleChat" style="
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  ">
+    💬
+  </div>
+  <div id="chatBox" style="
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #1e1e1e;
+    color: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  ">
+    <p style="margin: 0 0 8px; font-size: 14px;"><strong>Besoin d’aide ? 👋</strong></p>
+    <p style="margin: 0 0 8px; font-size: 14px;">Écris-nous sur WhatsApp</p>
+    <a href="https://wa.me/33773636597" target="_blank" style="
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    ">
+      Écrire sur WhatsApp
+    </a>
+    <span onclick="document.getElementById('chatBox').style.display='none'" style="
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+    ">✖</span>
+  </div>
+</div>
+<script>
+  document.getElementById("toggleChat").addEventListener("click", () => {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  });
+</script>
+</body>
+</html>

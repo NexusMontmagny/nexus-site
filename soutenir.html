@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soutenir Nexus</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #000;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, nav, footer {
+      background: #111;
+      padding: 15px 20px;
+      text-align: center;
+    }
+
+    .site-title {
+      font-size: 22px;
+      color: #00bcd4;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      color: #00bcd4;
+      margin-bottom: 15px;
+    }
+
+    .nexus-box {
+      background-color: #111;
+      border-left: 5px solid #00bcd4;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 20px;
+      max-width: 700px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .don-btn {
+      background-color: #00bcd4;
+      color: white;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .don-btn:hover {
+      background-color: #0097a7;
+    }
+
+    .don-progression {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .progress-bar {
+      background-color: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 20px;
+      margin: 10px 0;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+      width: 100%;
+    }
+
+    .progress-fill {
+      background-color: #00bcd4;
+      height: 100%;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+ <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h2>🙏 Soutenir le projet Nexus</h2>
+
+  <section class="nexus-box">
+    <p>Le projet Nexus est 100% indépendant et propulsé par passion. Chaque don nous aide à reconditionner du matériel, tester NexusOS et offrir plus d’outils gratuits.</p>
+    <p>Tu peux soutenir via notre page dédiée :</p>
+
+    <a href="https://www.paypal.com/donate/?hosted_button_id=5E5PVAJAA6EBQ" target="_blank" class="paypal-btn">
+  <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="Logo PayPal" class="paypal-logo" />
+  <span>Faire un don sécurisé via PayPal</span>
+</a>
+
+    <div class="don-progression">
+      <p>Objectif : 100€ pour tester NexusOS sur serveur dédié</p>
+      <div class="progress-bar">
+<div id="progressFill" class="progress-fill"></div>
+</div>
+      <p id="montantRecolte">Chargement...</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Nexus – Mis à jour manuellement</p>
+</footer>
+
+<script>
+  fetch("donnees.json")
+    .then(response => response.json())
+    .then(data => {
+      const pourcentage = Math.min((data.recolte / data.objectif) * 100, 100).toFixed(1);
+      document.getElementById("progressFill").style.width = pourcentage + "%";
+      document.getElementById("montantRecolte").textContent = `${data.recolte}€ récoltés`;
+    })
+    .catch(err => {
+      document.getElementById("montantRecolte").textContent = "Données non disponibles";
+      console.error("Erreur de chargement :", err);
+    });
+</script>
+</body>
+</html>

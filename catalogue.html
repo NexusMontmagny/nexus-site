@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalogue – Nexus</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <main>
+    <section class="intro">
+      <h2>📦 Catalogue Nexus</h2>
+      <p>Modèles disponibles, reconditionnés avec soin et personnalisables selon vos besoins.</p>
+    </section>
+
+    <section class="presentation">
+      <!-- Modèle disponible -->
+      <div class="product">
+        <h3>🖥️ Nexus ThinkPad T540p – Creator Edition</h3>
+        <ul>
+          <li>💽 Intel Core i5-4300M • 16 Go RAM</li>
+          <li>⚡ SSD 256 Go SATA + HDD 1 To via caddy</li>
+          <li>🎨 Animation de démarrage Nexus, thème personnalisé</li>
+          <li>🔐 Système optimisé, chiffrement disponible</li>
+          <li>💰 Prix indicatif : 290 € TTC (modulable selon options)</li>
+        </ul>
+        <p>
+          <a href="https://wa.me/33773636597?text=Bonjour%2C%20je%20souhaite%20commander%20ou%20personnaliser%20le%20mod%C3%A8le%20T540p%20–%20Creator%20Edition." class="cta">
+            Commander ou personnaliser ce PC via WhatsApp
+          </a>
+        </p>
+        <p>
+            <a href="configurateur.html" class="cta">
+                Commander ou personnaliser ce PC via Configurateur
+            </a>
+        </p>
+      </div>
+
+      <!-- Modèles à venir -->
+      <div class="product" style="opacity: 0.7;">
+        <h3>⏳ D'autres modèles arrivent bientôt...</h3>
+        <ul>
+          <li>💡 Divers formats (12", 14", 15.6")</li>
+          <li>🔋 Ultra-portables, stations de travail, gaming léger</li>
+          <li>📆 Disponibles à partir de septembre 2025</li>
+        </ul>
+        <p>
+          <a href="https://wa.me/33773636597?text=Bonjour%2C%20merci%20de%20me%20prévenir%20lorsque%20de%20nouveaux%20modèles%20Nexus%20seront%20disponibles." class="cta">
+            Me prévenir dès qu’ils arrivent
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="intro">
+      <a href="configurateur.html" class="cta">Créer mon PC sur mesure</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Nexus • Catalogue conçu par Ellyott ⚡</p>
+    <p>📧 contact.nexuspc1@gmail.com | 📱 WhatsApp : +33 7 73 63 65 97</p>
+  </footer>
+ <!-- 💬 Mini Chat WhatsApp Nexus -->
+<div id="miniChat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+  <div id="toggleChat" style="
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  ">
+    💬
+  </div>
+  <div id="chatBox" style="
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #1e1e1e;
+    color: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  ">
+    <p style="margin: 0 0 8px; font-size: 14px;"><strong>Besoin d’aide ? 👋</strong></p>
+    <p style="margin: 0 0 8px; font-size: 14px;">Écris-nous sur WhatsApp</p>
+    <a href="https://wa.me/33773636597" target="_blank" style="
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    ">
+      Écrire sur WhatsApp
+    </a>
+    <span onclick="document.getElementById('chatBox').style.display='none'" style="
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+    ">✖</span>
+  </div>
+</div>
+
+<script>
+  document.getElementById("toggleChat").addEventListener("click", () => {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  });
+</script>
+</div>
+</body>
+</html>

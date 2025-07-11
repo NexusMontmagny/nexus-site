@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Découvrir Linux</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+  <header class="header-bar">
+  <div class="logo-left">
+    <a href="index.html">
+      <img src="logo-nexus.png" alt="Logo Nexus">
+    </a>
+    <span class="site-title">Nexus</span>
+  </div>
+
+  <nav class="menu-right">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="catalogue.html">Catalogue</a></li>
+      <li><a href="configurateur.html">Configurateur</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="optimiseur.html">Optimiseur</a></li>
+      <li><a href="decouvrir-linux.html">Découvrir Linux</a></li>
+      <li><a href="projet-nexus.html">Projet NexusOS</a></li>
+      <li><a href="soutenir.html">Soutenir Nexus</a></li>
+    </ul>
+  </nav>
+</header>
+<body>
+  <div class="container">
+    <section class="intro">
+    <h1>🐧 Découvrir Linux avec Nexus</h1>
+    <p>Linux est un système d’exploitation libre, sécurisé et puissant. Beaucoup plus simple qu’on le croit, il permet d’optimiser un vieux PC comme de libérer un ordinateur moderne.</p>
+    <p>Grâce à cette page interactive, découvre les principales interfaces, démystifie les idées reçues, crée ta clé USB Linux, et trouve LA distribution qui te correspond.</p>
+    <h2>🖥️ Aperçu des interfaces Linux</h2>
+    <p>Voici quelques interfaces que tu peux rencontrer selon les distributions :</p>
+    <div id="interfaces" style="margin-top: 15px;">
+      <img id="interfaceImg" src="img/gnome.png" width="100%" style="border-radius: 8px; box-shadow: 0 2px 8px #ccc;">
+      <p id="interfaceCaption" style="text-align: center; font-weight: bold; margin-top: 8px;">GNOME (Ubuntu par défaut)</p>
+      <div style="text-align: center; margin-top: 10px;">
+        <button onclick="prevInterface()">◀️</button>
+        <button onclick="nextInterface()">▶️</button>
+      </div>
+    </div>
+<script>
+  const interfaces = [
+    { name: "GNOME (Ubuntu par défaut)", img: "img/gnome.png" },
+    { name: "Cinnamon (Linux Mint)", img: "img/cinnamon.png" },
+    { name: "XFCE (léger, rapide)", img: "img/xfce.png" },
+    { name: "Zorin OS (inspiré de Windows)", img: "img/zorin.png" }
+  ];
+
+  let currentInterface = 0;
+
+  function updateInterface() {
+    const imgEl = document.getElementById("interfaceImg");
+    const captionEl = document.getElementById("interfaceCaption");
+    imgEl.src = interfaces[currentInterface].img;
+    captionEl.innerText = interfaces[currentInterface].name;
+  }
+
+  function nextInterface() {
+    currentInterface = (currentInterface + 1) % interfaces.length;
+    updateInterface();
+  }
+
+  function prevInterface() {
+    currentInterface = (currentInterface - 1 + interfaces.length) % interfaces.length;
+    updateInterface();
+  }
+</script>
+</section>
+<section class="presentation">
+    <h2>❌ Idées reçues sur Linux… et la vérité ✅</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+      <div class="linux-myth">
+  <p><strong>❌ Linux c’est pour les geeks</strong></p>
+  <p><span class="truth">✅ Des distributions comme Mint ou Zorin sont parfaites pour les débutants.</span></p>
+</div>
+      <div class="linux-myth">
+        <p><strong>Il faut taper des lignes de commande</strong></p>
+        <p><span class="truth">Tout peut se faire via interface graphique. Le terminal est optionnel.</span></p>
+      </div>
+       <div class="linux-myth">
+        <p><strong>C’est moche ou compliqué</strong></p>
+         <p><span class="truth">GNOME, Cinnamon ou KDE sont élégants, clairs et personnalisables.</span></p>
+       </div>
+      <div class="linux-myth">
+        <p><strong>On ne peut pas jouer</strong></p>
+        <p><span class="truth">Avec Steam, Proton et Lutris, la plupart des jeux tournent sous Linux.</span></p>
+      </div>
+     <div class="linux-myth">
+        <p><strong>Pas compatible avec mon PC</strong></p>
+        <p><span class="truth">Les ThinkPad, Dell, HP, Asus… sont très bien reconnus et compatibles.</span></p>
+      </div>
+    </table>
+
+    <h2>🗣️ Témoignages d’utilisateurs</h2>
+
+    <div style="background-color:hsl(0, 0%, 0%); padding:15px; margin-bottom:15px; border-left: 5px solid #4a90e2; border-radius:8px;">
+      <p>“Je suis passée à Linux Mint après des années sous Windows. C’est plus rapide, plus stable, et je n’ai plus peur de faire une erreur.”</p>
+      <p><strong>— Radegonde, utilisatrice depuis 2012</strong></p>
+    </div>
+
+    <div style="background-color:hsl(0, 0%, 0%); padding:15px; margin-bottom:15px; border-left: 5px solid #e6b400; border-radius:8px;">
+      <p>“Ubuntu m’a permis de redonner vie à un vieux PC. Je fais du web, du traitement de texte, je regarde Netflix, tout fonctionne.”</p>
+      <p><strong>— Tuxmarc, utilisateur depuis 2008</strong></p>
+    </div>
+
+    <div style="background-color:hsl(0, 0%, 0%); padding:15px; margin-bottom:15px; border-left: 5px solid #28a745; border-radius:8px;">
+      <p>“Linux est devenu notre choix en entreprise pour la sécurité. Moins de failles, plus de stabilité, mises à jour fiables.”</p>
+      <p><strong>— 2TE.fr, société IT</strong></p>
+    </div>
+
+    <div style="background-color:hsl(0, 0%, 0%); padding:15px; margin-bottom:15px; border-left: 5px solid #d63384; border-radius:8px;">
+      <p>“Je suis designer. Fedora, Inkscape, GIMP… je crée tout sans licence. C’est puissant, propre, et ça fonctionne.”</p>
+      <p><strong>— Máirín Duffy, graphiste pro</strong></p>
+    </div>
+
+    <div style="background-color:hsl(0, 0%, 0%); padding:20px; margin-bottom:25px; border-left:5px solid #007acc; border-radius:8px;">
+      <p>“J'ai 14 ans, et quand j'ai ouvert un ordinateur pour la première fois, c'était un Windows. Mais en grandissant, j’ai décidé de passer à Ubuntu, malgré les idées reçues. Aujourd’hui, je développe mon propre site et un OS basé sur LineageOS que je veux proposer au public. Je suis le fondateur de <strong>Nexus</strong>.”</p>
+      <p style="margin-top:12px;"><strong>— Ellyott, créateur de Nexus</strong></p>
+    </div>
+    <h2>🔌 Créer une clé USB Linux (facilement)</h2>
+    <p>Tu veux tester Linux sans rien casser sur ton PC ? Voici comment faire :</p>
+
+    <ol>
+      <li>Télécharge l’image ISO de la distribution qui t’intéresse (voir plus bas) 💿</li>
+      <li>Télécharge <a href="https://etcher.balena.io/" target="_blank">BalenaEtcher</a></li>
+      <li>Lance Etcher → Sélectionne ton fichier ISO → Choisis ta clé USB → Clique sur “Flash” ⚡</li>
+    </ol>
+
+    <p>C’est tout. Pas besoin de terminal, ni d’installation compliquée.</p>
+    <a href="https://etcher.balena.io/" target="_blank">
+      <button style="padding:10px 20px; background:#007acc; color:white; border:none; border-radius:6px; cursor:pointer;">🧪 Ouvrir BalenaEtcher</button>
+    </a>
+    <h2>🎯 Trouver ma distribution Linux</h2>
+    <p>Réponds à quelques questions pour découvrir la distribution la plus adaptée à ton profil :</p>
+
+    <div id="quiz2">
+      <p><strong>1. Ton niveau en informatique ?</strong></p>
+      <select id="q1">
+        <option value="1">Débutant</option>
+        <option value="2">Intermédiaire</option>
+        <option value="3">Avancé / Geek</option>
+      </select>
+
+      <p><strong>2. Tu utilises ton PC surtout pour...</strong></p>
+      <select id="q2">
+        <option value="mint">Bureautique / Internet</option>
+        <option value="fedora">Création multimédia</option>
+        <option value="arch">Développement / Terminal</option>
+      </select>
+
+      <p><strong>3. Ton ordinateur est :</strong></p>
+      <select id="q3">
+        <option value="mint">Ancien (lent, +5 ans)</option>
+        <option value="ubuntu">Assez récent</option>
+        <option value="fedora">Moderne et performant</option>
+      </select>
+
+      <p><strong>4. Tu préfères :</strong></p>
+      <select id="q4">
+        <option value="stable">Un système très stable</option>
+        <option value="rolling">Un système à jour souvent</option>
+      </select>
+
+      <p><strong>5. Aimes-tu personnaliser ton interface ?</strong></p>
+      <select id="q5">
+        <option value="non">Pas du tout, je veux que tout fonctionne de base</option>
+        <option value="unpeu">Un peu, juste pour le look</option>
+        <option value="oui">J'adore tout modifier</option>
+      </select>
+
+      <p><strong>6. Es-tu à l’aise avec le terminal (ligne de commande) ?</strong></p>
+      <select id="q6">
+        <option value="0">Jamais utilisé</option>
+        <option value="1">Parfois</option>
+        <option value="2">Souvent</option>
+      </select>
+      <br>
+      <button onclick="recoLinux()">🎯 Obtenir ma distribution Linux</button>
+
+      <div class="result" id="resultat-linux"></div>
+      <button id="btnPDF" onclick="exportPDF()" class="btn-download" style="display:none;">📄 Télécharger la recommandation en PDF</button>
+    </div>
+<script>
+  const logos = {
+    "Linux Mint": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Linux_Mint_logo_without_wordmark.svg",
+    "Ubuntu LTS": "https://assets.ubuntu.com/v1/29985a98-ubuntu-logo32.png",
+    "Zorin OS": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Zorin_OS_logo_2022.svg",
+    "Fedora": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg",
+    "Manjaro": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Manjaro-logo.svg",
+    "Arch Linux": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg"
+  };
+
+  const isos = {
+    "Linux Mint": "https://linuxmint.com/download.php",
+    "Ubuntu LTS": "https://ubuntu.com/download/desktop",
+    "Zorin OS": "https://zorin.com/os/download/",
+    "Fedora": "https://getfedora.org/",
+    "Manjaro": "https://manjaro.org/download/",
+    "Arch Linux": "https://archlinux.org/download/"
+  };
+
+  let reco = "";
+
+  function recoLinux() {
+    const niveau = parseInt(document.getElementById("q1").value);
+    const usage = document.getElementById("q2").value;
+    const machine = document.getElementById("q3").value;
+    const style = document.getElementById("q4").value;
+    const custom = document.getElementById("q5").value;
+    const terminal = parseInt(document.getElementById("q6").value);
+
+    let score = {
+      "Linux Mint": 0,
+      "Ubuntu LTS": 0,
+      "Zorin OS": 0,
+      "Fedora": 0,
+      "Manjaro": 0,
+      "Arch Linux": 0
+    };
+
+    if (niveau === 1) score["Zorin OS"] += 2;
+    if (niveau <= 2) score["Linux Mint"] += 2;
+    if (niveau === 3) score["Arch Linux"] += 2;
+
+    score[usage === "mint" ? "Linux Mint" : usage === "fedora" ? "Fedora" : "Arch Linux"] += 2;
+
+    if (machine === "mint") score["Linux Mint"] += 2;
+    if (machine === "ubuntu") score["Ubuntu LTS"] += 2;
+    if (machine === "fedora") score["Fedora"] += 2;
+
+    if (style === "stable") score["Linux Mint"] += 2;
+    if (style === "rolling") score["Manjaro"] += 2;
+
+    if (custom === "non") score["Zorin OS"] += 2;
+    if (custom === "unpeu") score["Ubuntu LTS"] += 1;
+    if (custom === "oui") score["Manjaro"] += 1;
+
+    score["Arch Linux"] += terminal * 2;
+    score["Fedora"] += terminal;
+    if (terminal === 0) score["Zorin OS"] += 1;
+
+    const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
+    reco = best;
+
+    document.getElementById("resultat-linux").innerHTML = `
+      <p>Je recommande : <strong>${best}</strong></p>
+      <img class="distro-logo" src="${logos[best]}" alt="${best} logo">
+      <p><a href="${isos[best]}" target="_blank">Télécharger ${best} sur le site officiel</a></p>
+    `;
+
+    document.getElementById("btnPDF").style.display = "inline-block";
+  }
+
+  function exportPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Résultat du quiz Linux – Nexus", 20, 20);
+
+    doc.setFontSize(12);
+    doc.setFont("Helvetica", "normal");
+    doc.text("D’après tes réponses, la distribution recommandée est :", 20, 35);
+
+    doc.setFont("Helvetica", "bold");
+    doc.text("→ " + reco, 20, 45);
+
+    doc.setFont("Helvetica", "normal");
+    doc.text("Lien pour la télécharger :", 20, 60);
+    doc.setTextColor(0, 0, 255);
+    doc.textWithLink(isos[reco], 20, 68, { url: isos[reco] });
+
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10);
+    doc.setFont("Helvetica", "italic");
+    doc.text("Document généré automatiquement par le site Nexus – conçu par Ellyott", 20, 90);
+
+    doc.save("Recommandation_Linux_Nexus.pdf");
+  }
+</script>
+  </div> 
+  </section>
+<footer>
+    <p>© 2025 Nexus – Site conçu par Ellyott CISSE⚡</p>
+    <p>📍 Paris | Langues : FR • EN</p>
+  </footer>
+<!-- 💬 Mini Chat WhatsApp Nexus -->
+<div id="miniChat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; font-family: sans-serif;">
+  <div id="toggleChat" style="
+    background-color: #25d366;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  ">
+    💬
+  </div>
+  <div id="chatBox" style="
+    display: none;
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #1e1e1e;
+    color: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  ">
+    <p style="margin: 0 0 8px; font-size: 14px;"><strong>Besoin d’aide ? 👋</strong></p>
+    <p style="margin: 0 0 8px; font-size: 14px;">Écris-nous sur WhatsApp</p>
+    <a href="https://wa.me/33773636597" target="_blank" style="
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+    ">
+      Écrire sur WhatsApp
+    </a>
+    <span onclick="document.getElementById('chatBox').style.display='none'" style="
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ccc;
+    ">✖</span>
+  </div>
+</div>
+<script>
+  document.getElementById("toggleChat").addEventListener("click", () => {
+    const box = document.getElementById("chatBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  });
+</script>
+</body>
+</html>
+
