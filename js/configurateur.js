@@ -111,6 +111,7 @@ if (bay === "hdd") {
     priceDisplay.textContent = `Estimation : ${total} € TTC`;
 
     const boxItems = [
+      "Souris Lenovo filaire"
       "Notice d’utilisation Nexus",
       "Chargeur secteur Lenovo 90W",
       "Nettoyage complet + remise en boîte",
